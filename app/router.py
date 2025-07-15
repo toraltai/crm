@@ -13,4 +13,4 @@ api_router.include_router(categoryRouter, prefix='/category', tags=['Category AP
 api_router.include_router(partnerRouter, prefix='/partner', tags=['Partner API'])
 api_router.include_router(orderRouter, prefix='/order', tags=['Order API'])
 api_router.include_router(productRouter, prefix='/product', tags=['Product API'])
-# api_router.include_router(warehouseRouter, prefix='/warehouse', tags=['Warehouse API'])
+api_router.include_router(warehouseRouter, prefix='/warehouse', tags=['Warehouse API'])
