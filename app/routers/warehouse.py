@@ -7,6 +7,22 @@ from ..models import Product, GetProduct
 warehouseRouter = APIRouter()
 
 
+""" Оприходывание товара на складе """
+@warehouseRouter.put("/add_quantity")
+async def add_quantity(stock_obj: CreateStock, #type: ignore
+                      quantity: int):
+    stock = await Stock.get_or_none(product=stock_obj.product_id)
+
+    if stock:
+        new_quantity = stock.quantity + quantity
+        await Stock.get(id=stock.id).update(**stock_obj.model_dump(exclude_unset=True),
+                                            quantity=new_quantity)
+        
+        return await GetStock.from_queryset_single(Stock.get(id=stock.id))
+    return HTTPException(status_code=404,
+                                 detail={"message":"Продукт не найден"})
+
+
 @warehouseRouter.post("/add_warehouse", response_model = GetWarehouse)
 async def create_warehouse(warehouse_obj: CreateWarehouse,): #type: ignore
     warehouse = await Warehouse.create(**warehouse_obj.dict(exclude_unset=True))

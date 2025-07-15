@@ -24,3 +24,8 @@ class Stock(Model):
 Tortoise.init_models(["app.models.warehouses","app.models.products"], "models")
 GetStock = pydantic_model_creator(Stock, exclude=("product.orders_product", "product.attrs", "product.product_price"))
 CreateStock = pydantic_model_creator(Stock, name='StockIn', exclude_readonly=True, exclude=(["quantity"]))
+
+
+
+class StockEntry(Model):
+    pass
