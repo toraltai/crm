@@ -11,4 +11,5 @@ __all__ = [
     "Partner",
     "Warehouse",
     "Stock",
+    "StockTransferItem",
 ]

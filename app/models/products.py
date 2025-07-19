@@ -23,10 +23,17 @@ CreateProductPrice = pydantic_model_creator(ProductPrice, name="ProductPriceIn",
 
 
 
+class ProductCategory(Model):
+    id = fields.IntField(pk=True)
+    title = fields.CharField(max_length=100)
+    products: fields.ReverseRelation["Product"]
+
+
+
 class Product(Model):
     id = fields.IntField(pk=True)
     title = fields.CharField(max_length = 50)
-    
+    # category = fields.ForeignKeyField("models.ProductCategory", related_name="products")
     attrs = fields.ManyToManyField(
         "models.ProductAttribute", related_name="products", through="attrs_product"
     )
